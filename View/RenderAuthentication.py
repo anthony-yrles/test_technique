@@ -72,13 +72,12 @@ class RenderAuthentication:
         for entry in self.custom_entries:
             entry.destroy_entry()
 
-        background_image = Image(self.canvas, 0, 0, './assets/bcg_sign_menu.png')
+        background_image = Image(self.canvas, 0, 0, './assets/bcg_menu.png')
         background_image.draw()
 
         entry1 = CustomEntry(self.canvas, "Name", x=300, y=141)
-        entry3 = CustomEntry(self.canvas, "Email", x=300, y=293)
-        entry4 = CustomEntry(self.canvas, "Password", x=300, y=369, show='*')
-
+        entry3 = CustomEntry(self.canvas, "Email", x=300, y=203)
+        entry4 = CustomEntry(self.canvas, "Password", x=300, y=269, show='*')
 
         self.custom_entries.extend([entry1, entry3, entry4])
 
@@ -122,21 +121,27 @@ class RenderAuthentication:
         self.screen_object.get_screen().mainloop()
         self.canvas.update()
 
+    # Render the update page with the inputs
     def render_change_information(self):
 
         for entry in self.custom_entries:
             entry.destroy_entry()
 
+        background_image = Image(self.canvas, 0, 0, './assets/bcg_menu.png')
+        background_image.draw()
+
         entryName = CustomEntry(self.canvas, "Name", x=300, y=141)
-        entryEmail = CustomEntry(self.canvas, "Email", x=300, y=293)
-        entryBio = CustomEntry(self.canvas, "Bio", x=300, y=369)
+        entryEmail = CustomEntry(self.canvas, "Email", x=300, y=203)
+        entryBio = CustomEntry(self.canvas, "Bio", x=300, y=269)
 
-        update_button = Button(self.canvas, 330, 450, './assets/update_button.png', None)
-        delete_button = Button(self.canvas, 330, 500, './assets/delete_button.png', None)
-        deconnexion_button = Button(self.canvas, 330, 550, './assets/disconnect_button.png', None)
-
-        update_button.bind('<Button-1>', lambda event: self.update_information(entryName.get_value(), entryEmail.get_value(), entryBio.get_value()))
-        delete_button.bind('<Button-1>', lambda event: self.delete_user())
+        update_button = Button(self.canvas, 200, 400, './assets/updatebutton.png', None)
+        update_button.bind('<Button-1>', lambda event: self.authentication.update_information(entryName.get_value(), entryEmail.get_value(), entryBio.get_value()))
+        
+        delete_button = Button(self.canvas, 500, 400, './assets/delete_button.png', None)
+        delete_button.bind('<Button-1>', lambda event: self.authenticate.delete_user())
+        
+        deconnexion_button = Button(self.canvas, 200, 500, './assets/disconnect_button.png', None)
         deconnexion_button.bind('<Button-1>', lambda event: self.render_main_menu())
 
-
+        self.screen_object.get_screen().mainloop()
+        self.canvas.update()

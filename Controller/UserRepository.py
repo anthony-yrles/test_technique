@@ -1,5 +1,6 @@
 from Model.RequestDb import RequestDb
 import hashlib
+
 '''
 UserRepository class is a child class of RequestDb class. 
 It is used to interact with the user table in the database.
